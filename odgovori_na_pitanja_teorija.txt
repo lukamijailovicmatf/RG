@@ -1,0 +1,312 @@
+--------------
+I glava - Uvod
+--------------
+
+
+1.1 Cime se bavi racunarska grafika?
+------------------------------------
+* Racunarska grafika se bavi modelovanjem objekata na sceni, modelovanjem osvetljenja scene i 
+  iscrtavanjem scene iz tacke gledista kamere.
+  
+  
+1.2 Navesti bar cetiri razlicita domena u kojima se koristi racunarska grafika.
+-------------------------------------------------------------------------------
+* Fotografija, film, video igre, dizajn (CAD), proizvodnja (CAM), inzenjering (CAE).
+
+
+1.3 Koje su osnovne poddiscipline racunarske grafike?
+-----------------------------------------------------
+* Modelovanje, renderovanje, animacija, obrada slika, VR (virtuelna realnost), AR (prosirena realnost), 3D skeniranje.
+
+
+1.4 Koja je razlika izmedju virtualne i prosirene realnosti?
+-----------------------------------------------------------
+* Virtuelna realnost predstavlja racunarski generisano okruzenje u koje korisnik biva ubacen i moze da
+  interaguje sa njim, dok se kod prosirene realnosti koriste informacije iz realnog sveta u kombinaciji sa nekim
+  racunarski generisanim objektima.
+  
+  
+1.5 Pored objekata koji se nalaze na sceni, sta se jos modeluje u fazi modelovanja?
+-----------------------------------------------------------------------------------
+* Bitno je takodje odrediti kako ce se modelovati svetlost tj. osvetljenje na samoj sceni, pod kojim uglom i kojim
+  intenzitetom ce biti zastupljeno na sceni, sta ce mu biti izvor i slicno.
+  
+
+1.6 Sta se podrazumeva pod tim da je proces modelovanja hijerarhijski?
+----------------------------------------------------------------------
+* Kljuc modelovanja scene koja potencijalno moze biti jako slozena je u njenoj hijerarhijskoj strukturi.
+  Naime, slozeni objekti mogu se dobiti od jednostavnijih objekata koji se mogu napraviti od jos jednostavnijih 
+  objekata i tako sve dok ne stignemo do osnovnih geometrijskih primitiva (tipa sfera, valjaka, kupa i kocki)
+  koje se mogu direktno modelovati.
+  
+  
+1.7 Objasniti koncept grafa scene. Da li graf scene mora biti stablo?
+---------------------------------------------------------------------
+* Komponente slozene scene formiraju hijerarhijsku strukturu podataka u kojoj je svaki objekat povezan
+  sa svojim sastavnim delovima i ovu strukturu podataka nazivamo graf scene (eng. scene graph). Graf
+  scene je drvolika struktura podataka kod koje koren predstavlja kompletnu scenu koja se renderuje,
+  njegova deca predstavljaju objekte najviseg nivoa na sceni, itd. Listovi grafa scene su osnovni (primitivni)
+  objekti, kao sto su sfera, kocka i valjak, dok unutrasnji cvorovi odgovaraju primeni geometrijskih transformacija
+  S obzirom na to da cvorovi mogu biti deca veceg broja unutrasnjih cvorova, graf scene u opstem slucaju ne mora biti 
+  stablo, ali jeste usmereni aciklicki graf.
+  
+
+1.8 Cime se bavi iscrtavanje, tj. renderovanje?
+-----------------------------------------------
+* Renderovanje predstavlja transformisanje scene sastavljene od modela objekata u trodimenzionom prostoru u 
+  dvodimenzionu sliku. Modeli su sastavljeni od primitiva koje su podrzane u sistemu za renderovanje.
+  U odnosu na nacin renderovanja scene razlikujemo dva pristupa: rasterizaciju (eng. rasterization) i 
+  tehniku praćenja zraka (eng. ray tracing).
+  
+  
+1.9 Koja je razlika izmedju rasterizacije i tehnike pracenja zraka?
+------------------------------------------------------------------
+* Prilikom rasterizacije elementi scene se projektuju ka kameri. Naime, za svaku primitivu sa scene potrebno 
+  je utvrditi u koje se piksele projektuje, a zatim utvrditi koja ce od primitiva biti vidljiva. 
+  Tehnika rasterizacije je veoma efikasna – njom je koriscenjem savremenog hardvera moguce prikazati milijarde primitiva
+  (prevashodno trouglova) u sekundi, ali je teze na slici postici fotorealizam, senke i refleksije koje mozemo videti okom.
+  S druge strane, kod tehnike pracenja zraka se prati svetlosni zrak iz kamere kroz svaki piksel slike i utvrdjuje se koji
+  objekti sa scene doprinose boji tog piksela. Ova tehnika je u opstem slucaju sporija od rasterizacije (ponekad je 
+  potrebno sacekati minute ili sate da bismo generisali jednu sliku), ali je njom lakse postici fotorealizam.
+  
+  
+1.10 Kojom tehnikom renderovanja je lakse postici fotorealizam na slici?
+------------------------------------------------------------------------
+* Tehnikom pracenja zraka. (objasnjenje u odgovoru prethodnog pitanja)
+
+
+1.11 Sta je graficka protocna obrada?
+-------------------------------------
+* Tradicionalno, transformacija iz modela preko scene pa sve do slike se “razbija” na manje korake,
+  koji se nazivaju grafickom protocnom obradom (eng. graphics pipeline, rendering pipeline). Dakle, 
+  graficka protocna obrada je osnovni okvir u racunarskoj grafici kojim se zadaju koraci prilikom 
+  transformacije trodimenzione scene u dvodimenzionu reprezentaciju na ekranu. Svaki od koraka u 
+  grafickoj protocnoj obradi prosledjuje rezultat svoje faze narednom koraku. Ona se može implementirati 
+  na razlicite nacine i neki od koraka se mogu implementirati u samom hardveru, a neki softverski. 
+  S obzirom da je citav proces podeljen na striktno definisane korake, svaki od koraka graficke protocne 
+  obrade moze se zasebno optimizovati.
+  
+  
+1.12 Dati primer rendereovanja u realnom vremenu i oflajn renderovanja.
+-----------------------------------------------------------------------
+* Primer renderovanja u realnom vremenu je video igra, a oflajn renderovanja je film.
+
+
+1.13 Sta razlikuje interaktivnu od neinteraktivne racunarske grafike?
+---------------------------------------------------------------------
+* Interaktivna racunarska grafika podrazumeva dinamicki nacin prikaza slike na racunaru
+  uz aktivno ucesce coveka u stvaranju i izmeni slike, gde su rezultati odmah vidljivi, kao sto je slucaj
+  kod racunarskih igara ili simulacija letenja. Nasuprot tome, pod neinteraktivnom racunarskom grafikom
+  podrazumeva se svako generisanje ili predstavljanje slikovnih informacija koje ne zadovoljava prethodne uslove; 
+  u ovom slučaju se, dakle, radi o staticnim informacijama, koje su predstavljene bojom i oblikom, bez interakcije 
+  coveka (npr. animacije i filmovi).
+  
+  
+1.14 Kako se zove prvi interaktivni graficki sistem? Ko je njegov autor?
+------------------------------------------------------------------------
+* Sketchpad je prvi u potpunosti interaktivni graficki sistem, razvijen u MIT-ovim laboratorijama
+  pocetkom sedamdesetih godina proslog veka. On je omogucavao komunikaciju sa racunarom crtanjem
+  po ekranu racunara uz pomoc svetlosne olovke. Autor sistema Sketchpad je Ivan Saderland (Ivan Sutherland) 
+  i njegova doktorska teza predstavlja prvu doktorsku tezu iz oblasti racunarske grafike.
+  
+  
+1.15 Na koji nacin se generise slika kod vektorskih sistema?
+------------------------------------------------------------
+* Na samom pocetku razvoja uredjaja za prikaz, korisceni su vektorski sistemi. Kod njih se linija dobija 
+  tako sto se digitalne koordinate krajnjih tacaka transformisu u analogni napon za elektronski zrak koji 
+  pada na povrsinu ekrana. Ova metodologija se zove i random scan metodologija (zato sto linija moze da spaja 
+  "bilo koje dve tacke na ekranu"). Vektorski monitori ne prate nuzno sadrzaj citavog ekrana, vec samo duzi od 
+  kojih se sastoji slika koja se prikazuje, te brzina osvezavanja slike zavisi od kompleksnosti podataka od kojih 
+  se slika sastoji. Slika se osvezava obicno 30 do 60 puta u sekundi (30-60 Hz) i moguce je iscrtati i do 100000 linija. 
+  Pritom su linije glatke, ali se obojene povrsine tesko prikazuju. Vektorski sistemi su pogodni za mrezne modele.
+  
+  
+1.16 Kakav izgled imaju kose linije u vektorskim, a kakav u rasterskim sistemima?
+---------------------------------------------------------------------------------
+* Kod vektorskih sistema su linije glatke, ali se obojene povrsine tesko prikazuju. U rasterskim sistemima kose 
+  linije su "stepenaste", ali se zato obojene povrsine lakse prikazuju (problem popunjavanja regiona nije tezak).
+  
+  
+1.17 Koja tehnologija se koristi za CRT ekrane, koja za LCD ekrane, a koja za OLED ekrane?
+------------------------------------------------------------------------------------------
+* CRT sistemi (eng. cathode ray tube) predstavljaju rastersku grafiku zasnovanu na televizijskoj 
+  tehnologiji i katodnim cevima. Kod ovih sistema slika je predstavljena pikselima. Oni funkcionisu po 
+  sledecem principu: elektronski top emituje zrak elektrona koji se ubrzava pozitivnim naponom do fosforom 
+  presvucenog ekrana. Na putu do ekrana, mehanizmom za fokusiranje elektroni se usmeravaju ka konkretnoj tacki 
+  na ekranu. S obzirom na to da fosfor emituje svetlost koja opada eksponencijalno sa vremenom, sliku je potrebno 
+  osvezavati, najcesce 60 puta u sekundi (60Hz).
+  LCD ekrani (eng. liquid-crystal display) postaju siroko rasprostranjeni od sredine 1990-ih. Oni predstavljaju tanke, 
+  ravne prikazne uredjaje. Zasnovani su na koriscenju dugackih molekula kristala, koji zahvaljujuci specificnom koriscenju
+  elektriciteta i polarizacije svetlosti stvaraju osvetljene ili tamne delove ekrana. LCD paneli ne proizvode svetlost, 
+  te im je neophodan izvor svetla (tzv. "pozadinsko svetlo").
+  Glavna prednost im je sto trose veoma malo elektricne energije. Slika se kod LCD ekrana osvezava i do
+  200 puta u sekundi (200Hz). Za razliku od CRT ekrana, LCD ekrani imaju nativnu fiksnu rezoluciju, sa fiksnim rasterom.
+  OLED ekrani (eng. organic light-emitting diode). Oni se prave od organskih materijala koji emituju svetlost kada kroz njih
+  prolazi elektricitet. Dok je kod LCD ekrana potrebno da postoji pozadinsko svetlo, pikseli kod OLED ekrana proizvode svoju
+  svetlost, te su oni efikasniji i dosta tanji od LCD skerana. Dodatno, podloga OLED ekrana ne mora biti kruta vec moze biti i
+  fleksibilna. TakoDJe na OLED ekranima moguCe je postiCi veCI kontrast nego kod LCD ekrana.
+  MeDJutim ova tehnologija je dosta sloZenija i zbog toga su OLED ekrani znaCajno skuplji od LCD ekrana.
+  
+  
+1.18 Cemu sluzi frejm bafer? Cemu sluzi video kontroler?
+--------------------------------------------------------
+* U rasterskim sistemima slika se formira u frejm baferu procesom rasterizacije. Na frejm bafer se
+  moze gledati kao na racunarsku memoriju organizovanu u vidu dvodimenzionog niza tako da svaka
+  adresibilna lokacija (x,y) odgovara jednom pikselu u kome se cuva njegova boja. Bitska dubina (eng. bit depth) 
+  je broj bitova koji odgovara svakom pikselu u frejm baferu. U frejm baferu se cuva sadrzaj koji se zatim prikazuje 
+  na ekranu.
+  
+  
+1.19 Koji je osnovni zadatak grafickog procesora?
+-------------------------------------------------
+* Graficki procesor je hardver specijalne namene razvijen da omoguci efikasnu rasterizaciju grafickih
+  primitiva koje se smestaju u frejm bafer. Moderni graficki procesori su zahvaljujuci svojoj arhitekturi
+  daleko efikasniji od procesora opste namene u izvrsavanju matematickih operacija koje su potrebne za
+  iscrtavanje slike.
+  
+  
+1.20 Koja je razlika izmedju direktnog i odlozenog rezima renderovanja?
+-----------------------------------------------------------------------
+* Po tome da li se scena iscrtava iznova ili delimicno razlikujemo direktni (eng. immediate regime)
+  i odlozeni rezim (eng. retained regime) renderovanja. Igrice i simulacije koriste direktan rezim jer se
+  vecina piksela razlikuje iz frejma u frejm, a graficki korisnicki interfejsi najcesce koriste odloženi rezim
+  jer vecina piksela ostaje nepromenjena iz frejma u frejm. Za odlozeni rezim neophodno je predstaviti scenu u 
+  vidu grafa scene kako bi dogadjaji i promene na sceni bile propagirane samo onim delovima scene na kojima je 
+  došlo do promene.
+
+
+------------------------
+II glava - Rasterizacija
+------------------------
+
+
+2.1 Na koji nacin se pamti rasterska, a na koji nacin vektorska slika?
+----------------------------------------------------------------------
+* Rasterska slika je predstavljena kao pravougaona mreza elemenata koje nazivamo pikseli (eng. pixel,
+  picture element). Oni za neku lokaciju tacke na slici cuvaju informaciju o boji, intenzitetu, osvetljenosti,
+  transparentnosti. Svaka slika sadrzi fiksiran broj piksela koji definise kvalitet slike i on odgovara rezoluciji slike. 
+  Ako bi slika sadrzala veci broj piksela, to bi dovelo do boljeg kvaliteta slike iste ili vece dimenzije, ali bi, takodje, 
+  povecalo velicinu odgovarajuce datoteke.
+  Slika se u vektorskom formatu cuva kao kolekcija geometrijskih primitiva kao sto su tacke, linije, krive i poligoni, a 
+  njihova reprezentacija se temelji na matematickim jednacinama. Za svaku od primitiva zadaje se gde ce se nalaziti na slici.
+  
+  
+2.2 Navesti po tri rasterska i vektorska formata.
+-------------------------------------------------
+* Rasterski: jpg, png, gif.
+  Vektorski: svg, eps, cdr.
+  
+  
+2.3 Kako bi izgledala vektorska, a kako rasterska slika dva pravougaonika sa stranicama paralelnim koordinatnim osama? 
+    Koja od ove dve slike bi zauzimala manje memorije ako je rasterska slika dimenzije 256 × 256 piksela? Zasto?
+----------------------------------------------------------------------------------------------------------------------
+* Vektorska slika: Definisana je pomocu matematickih formula i geometrijskih primitiva. Za dva pravougaonika cije su stranice 
+  paralelne koordinatnim osama, vektorski zapis sadrzi samo nekoliko kljucnih parametara za svaki pravougaonik — na primer, koordinate 
+  gornjeg levog ugla (x,y), sirinu i visinu.
+  Rasterska slika: Sastoji se od mreze (matrice) piksela. U ovom slucaju, imamo mrezu dimenzija 256 × 256 piksela (sto je ukupno 65.536 piksela). 
+  Pravougaonici se prikazuju tako sto se pikseli koji se nalaze unutar njihovih granica oboje jednom bojom (na primer, crnom), dok su ostali pikseli 
+  obojeni bojom pozadine (na primer, belom).
+  Vektorska slika zauzima znatno manje memorije. 
+  Memorija za vektorsku sliku: Potrebno je da sacuvamo samo nekoliko brojeva po pravougaoniku (na primer: x1, y1, w1, h1 za prvi i x2, y2, w2, h2 za drugi).
+  To je svega nekoliko brojeva (oko 8 promenljivih), sto zauzima svega nekoliko desetina bajtova memorije. Memorija ne zavisi od velicine ili rezolucije slike 
+  na ekranu, vec iskljucivo od broja objekata.
+  Memorija za rastersku sliku: Rasterska slika dimenzija 256 × 256 piksela mora da cuva informaciju o boji za svaki pojedinacni piksel.
+  Ako je u pitanju crno-bela slika (1 bit po pikselu), potrebno je: 256 × 256 = 65.536 bitova, odnosno 8 KB memorije.
+  Ako je u pitanju slika u boji (npr. standardni RGB format sa 3 bajta po pikselu), potrebno je: 256 × 256 × 3 = 196.608 bajtova, sto je oko 192 KB.
+  
+  
+2.4 Zasto je vektorsku sliku moguce skalirati bez gubitka kvaliteta, a rastersku ne?
+------------------------------------------------------------------------------------
+* Rastersku sliku moguce je skalirati, medjutim, smanjenjem slike u odnosu na izvornu dimenziju gube se informacije o slici. Na primer, ako sliku 
+  smanjimo na 50% originalne dimenzije bice prikazan svaki drugi piksel, te slika postaje nazubljena. Povecavanjem slike u odnosu na izvornu dimenziju 
+  gube se fini detalji i slika postaje mutna. Rezolucijom slike je ograniceno do koje dimenzije je moguce povecati rastersku sliku tako da pojedinacni 
+  pikseli ne postanu vidljivi.
+  Vektorsku sliku je moguće skalirati (povecati, smanjiti) bez gubitka na kvalitetu slike. Takodje, pomeranje elemenata na slici ne bi negativno uticalo 
+  na kvalitet slike kao u slucaju rasterske grafike, jer se ne manipulise sa konkretnim pikselima slike, vec sa primitivama kao sto su linije, tacke, 
+  krive, poligoni, ... (verovatno ima jos nekih stvarcica 🤔)
+  
+  
+2.5 Navesti primer gde se u praksi koristi vektorska grafika, a gde rasterska.
+------------------------------------------------------------------------------
+* Vektorska grafika se prevashodno koristi tamo gde je potrebno omoguciti skaliranje bez gubitka na kvalitetu slike: za opisivanje fontova, logotipova 
+  kompanija i slika koje u sebi sadrze tekst.
+  
+  
+2.6 Sta je zadatak rasterizacije trougla?
+-----------------------------------------
+* Ako obradu proizvoljne figure svedemo na obradu trougla, moguce je operacije za rad nad trouglom dodatno optimizovati.
+  Graficka protocna obrada za proces rasterizacijetrougla sastoji se iz narednih koraka:
+  1. projekcije objekata na dvodimenzioni ekran;
+  2. utvrdjivanja koje piksele prekriva svaki od trouglova;
+  3. interpolacije atributa datih u temenima trougla na tacke u unutrasnjosti trougla;
+  4. izracunavanja boje svakog piksela;
+  5. izracunavanja vrednosti svakog piksela kombinovanjem vrednosti za svaki od trouglova, kako bi se dobila konacna slika.
+  
+  
+2.7 Zasto problem racunanja pokrivenosti piksela trouglom razmatramo kao problem uzorkovanja?
+---------------------------------------------------------------------------------------------
+* Svaka slika nastaje kao neprekidni signal – svetlost koja ulazi u pravu ili sinteticku kameru je neprekidni signal, koji se onda uzorkuje procesom 
+  fotografisanja, odnosno renderovanja. Na ovaj nacin dobijamo niz piksela, odnosno diskretni signal. U najjednostavnijoj varijanti uzorkovanje vrsimo 
+  u tackama koje predstavljaju centre piksela. Umesto serijskog izvrsavanja mozemo paralelno testirati sve uzorke iz granicnog opsega trougla.
+  Unutar granicnog opsega postojace velike oblasti piksela koje bismo mozda nekako mogli unapred eliminisati iz daljeg ispitivanja.
+  Paralalno izvrsavanje testova je u ovom scenariju moguce unaprediti tako sto granicni opseg trougla podelimo na blokove srednje velicine i pre 
+  paralelnog testiranja pojedinacnih piksela na pripadnost trouglu, za svaki blok mozemo da proverimo da li ima presek sa trouglom: ako blok ne preseca trougao,
+  eliminisemo sve piksele iz bloka, ako je citav blok sadrzan unutar trougla, zakljucujemo da se svi pikseli tog bloka nalaze unutar trougla. Ako ne vazi nista 
+  od prethodnog, testiramo u paraleli pojedinacno sve piksele iz bloka.
+  A na kraju krajeva nad jednim pikselom mozemo izvrsiti veliki broj uzorkovanja gde se takodje moze dobiti tacnija informacija o pripadnosti piksela trouglu,
+  pa samim time i smanjiti neki nusefekti kao sto je aliasing i jos neki drugi.
+  
+  
+2.8 Sta je aliasing? Kako se on manifestuje u racunarskoj grafici?
+------------------------------------------------------------------
+* U opstem slucaju ako imamo neprekidni signal koji zelimo da zapamtimo u digitalnom formatu, mi vrsimo njegovo uzorkovanje i pamtimo listu dobijenih vrednosti. 
+  Ako naknadno zelimo da izvrsimo rekonstrukciju polaznog signala na osnovu zapamcenih vrednosti cesto se desava da se rekonstruisani signal razlikuje od polaznog 
+  i ovaj efekat naziva se aliasing. Interesantna je i naredna pojava koja se moze uociti na video-snimcima: ako se auto krece i konstantno ubrzava, mi uocavamo 
+  kako se tockovi automobila sve brze krecu unapred, a onda odjednom imamo utisak da su tockovi staticni ili pocinju da se krecu unazad. Ovaj efekat je posledica 
+  toga sto video zapis prikazuje 30 slika u sekundi, te se prilikom prebrzog okretanja tocka uzorkuje neki slucajan momenat pri okretanju tocka cime dobijamo neocekivano
+  ponasanje. Ovaj efekat poznat je pod nazivom temporalni aliasing. Drugi moguci efekat je sledeci: razmotrimo primer slike beskonacne crno-bele sahovske table koja 
+  se udaljava od posmatraca iznad koje je crna pozadina. Boja svakog od piksela na slici je crna ili bela. Mozemo primeti da slika izgleda neprirodno, odnosno da se na 
+  horizontu, tj. u delu slike koji ima visoku frekvenciju javlja tzv. Moire uzorak.
+  
+  
+2.9 Kako glasi Najkvist-Senonova teorema?
+-----------------------------------------
+* Postavlja se pitanje u kojim tacno situacijama dolazi do aliasing efekta. Odgovor na ovo pitanje daje nam Najvkist-Senonova teorema koja glasi: 
+  ako signal nema frekvencije vise od 𝜔0, on se moze savrseno rekonstruisati ako se uzorkuje sa ucestanoscu dvostruko vecom od najvise frekvencije 𝜔0.
+  
+  
+2.10 Najkvist-Senonovom teoremom se zadaje uslov kolika treba da bude (a) minimalna (b) prosecna (c) maksimalna frekvencija na kojoj treba uzorkovati signal 
+     kako bi se on mogao savrseno rekonstruisati (zaokružiti tacan odgovor).
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Posto ovde ne mogu da zaokruzujem, dacu ovako samo odgovor 🙄. Mislim u samoj formulaciji teoreme kaze DVOSTRUKO VECOM tako da je odgovor (a). Znaci
+  minimalna frekvencija uzorkovanja mora biti bar dvostruko veca od najvise frekvencije signala.
+  
+  
+2.11 Cemu sluzi prefiltriranje u procesu rekonstrukcije signala?
+----------------------------------------------------------------
+* Problem sa primenom Najkvist-Senonove teoreme je to sto signali cesto nisu ogranicenog opsega – npr. neku ivicu na slici je tesko izraziti kao sinusoidnu 
+  funkciju: morali bismo da dodamo beskonacnu seriju sve vecih frekvencija, kako bismo dobili deo-po-deo konstantnu funkciju. Iz tog razloga se nekada koristi 
+  prefiltriranje signala, kojim se ogranicava maksimalna frekvencija prisutna u signalu.
+  
+  
+2.12 Sta je Moire uzorak?
+-------------------------
+* Razmotrimo primer slike beskonacne crno-bele sahovske table koja se udaljava od posmatraca iznad koje je crna pozadina. Boja svakog od piksela na slici je 
+  crna ili bela. Mozemo primeti da slika izgleda neprirodno, odnosno da se na horizontu, tj. u delu slike koji ima visoku frekvenciju javlja tzv. Moire uzorak.
+  
+  
+2.13 Cemu sluzi nadsemplovanje? Kako se realizuje?
+--------------------------------------------------
+* Za svaki piksel slike potrebno je utvrditi koliki je njegov procenat u unutrasnjosti trougla. Do sada smo uzorkovanje vrsili po jednom za svaki piksel i to u
+  tacki koja predstavlja centar piksela. Na osnovu prethodnog razmatranja zakljucujemo da je potrebno povecati frekvenciju uzorkovanja, odnosno funkciju prekrivenosti 
+  uzorkovati veci broj puta za svaki od piksela. Ova antialiasing tehnika naziva se nadsemplovanje (eng. supersampling).
+  Nakon uzorkovanja funkcije prekrivenosti trouglom na vecem broju tacaka po pikselu, potrebno je za svaki od piksela uproseciti dobijene vrednosti uzoraka iz tog 
+  piksela, odnosno izracunati procenat broja uzoraka po pikselu koji su prekriveni. Ovo odgovara primeni tzv. filtera kutije (eng. box filter) kojim se vrednost 
+  izlaznog piksela dobija uprosecavanjem odgovarajucih vrednosti.
+  
+
+2.14 Navesti razlicite nacine na koje je moguce za sve piksele iz oblasti razmatranja utvrditi da li se nalaze unutar trougla.
+------------------------------------------------------------------------------------------------------------------------------
+* Preko orijentacije zakljuciti da li pripadaju trouglu, zatim ima bounding box kada odredimo granicni opseg koji ogranicava trougao i onda bude jos efikasnije,
+  a ima i onaj hibridni pristup gde umesto da unapred odredimo velicine blokova kojima cemo da ispitujemo pripadnost grupe piksela trouglu mozemo da krenemo postepeno
+  od vecih blokova pa onda na osnovu odredjenih situacija u zavisnosti da li ima pripadnosti ili ne da blokove povecavamo ili smanjujemo.
